@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import FormBuilderRoutes from './routes/FormBuilderRoutes';
+import FormViewRoutes from './routes/FormViewRoutes';
+import { Toaster } from 'react-hot-toast';
+
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='font-body'>
+      <BrowserRouter>
+        <Routes>
+
+        <Route path='/' element={<FormBuilderRoutes/>}>
+
+        </Route>
+
+        <Route path='/view-form/:id' element={<FormViewRoutes/>}>
+
+        </Route>
+
+        </Routes>
+        <Toaster/>
+
+      </BrowserRouter>
+
     </div>
   );
 }
