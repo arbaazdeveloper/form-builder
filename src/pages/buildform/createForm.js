@@ -4,11 +4,15 @@ import Description from '../../components/Description'
 import Button from '../../components/Button'
 import FormBuilder from './FormBuilder'
 
+import { toast } from 'react-hot-toast'
+import { usePostRequest } from '../../hooks/useApiCalls'
+
 const CreateForm = () => {
    
     const schema = { title: '', descrition: '', elements: [{ type: 'text', label: '', options: [] }] }
     const [created, setcreated] = useState(false);
     const [form, setFrom] = useState(schema);
+    const [postRequest, error] = usePostRequest('/create-form', form);
 
 
     const handleTitleChange = (e) => {
@@ -19,12 +23,42 @@ const CreateForm = () => {
         setFrom({ ...form, descrition: e.target.value })
     }
     const handleCreateForm = () => {
+        if(form.title===''){
+            toast.error('Name cannot be empty !');
+            return
+        }
         setcreated(true)
+    }
+    const handleSave = async () => {
+
+        for (let i = 0; i < form.elements.length; i++) {
+            if (form.elements[i].label === '') {
+                toast.error('Question Cannot be empty !')
+                return
+            }
+        }
+       
+        toast('Saving...')
+        const response = await postRequest();
+
+
+        if (error) {
+            console.log(error)
+            return toast.error('Something Went Wrong !')
+        }
+
+
+
+
+        if (response.message === 'form created') {
+            toast.success('form created sucessfully !')
+        }
+
     }
     return (
         <div className='w-full'>
             {created ? <>
-                <FormBuilder form={form} setForm={setFrom} />
+                <FormBuilder form={form} setForm={setFrom} onSave={handleSave} />
 
             </>
                 : <>

@@ -23,7 +23,7 @@ export const usePostRequest = (endpoint,formData) => {
 
 
 }
-export const useGetRequest = (endpoint,formData) => {
+export const useGetRequest = (endpoint) => {
     
 
     const [error, setError] = useState('')
@@ -40,6 +40,28 @@ export const useGetRequest = (endpoint,formData) => {
 
     }
     return [getRequest,error];
+
+
+
+
+}
+export const usePutRequest = (endpoint,formData) => {
+    
+
+    const [error, setError] = useState('')
+    const putRequest = async () => {
+        try {
+
+            const response =await  axios.put(`${url}${endpoint}`, formData);
+            return response.data;
+
+        } catch (error) {
+             setError(error)
+        }
+       
+
+    }
+    return [putRequest,error];
 
 
 

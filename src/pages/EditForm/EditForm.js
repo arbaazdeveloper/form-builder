@@ -5,32 +5,35 @@ import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 const EditForm = () => {
-  const [getRequest,error]=useGetRequest('/get-all-forms')
-  const [forms,setForms]=useState([]);
-  const navigate=useNavigate();
-  const setEditForm=(id)=>{
-    navigate('/edit-form/'+id)
+  const [getRequest, error] = useGetRequest('/get-all-forms')
+  const [forms, setForms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const setEditForm = (id) => {
+    navigate('/edit-form/' + id)
 
   }
 
-  
-   useEffect(()=>{
-    const getForms=async()=>{
-    
+
+  useEffect(() => {
+    const getForms = async () => {
+
       setForms(await getRequest());
-      if(error){
+      if (error) {
         toast.error('Something Went Wrong!')
       }
+      setLoading(false)
     }
     getForms();
-   
-   },[])// eslint-disable-line react-hooks/exhaustive-deps
+
+  }, [])// eslint-disable-line react-hooks/exhaustive-deps
   return (
-    
-        <div className='flex flex-col w-full gap-[5px]'>
-        {forms.map((form)=><Formbox title='Grades' button={'Edit form'} onClick={()=>setEditForm(form._id)}/>)}
-        </div>
-  
+
+    <div className='flex flex-col w-full gap-[5px]'>
+      {loading && <h1 className='text-center text-[30px]'>Loading...</h1>}
+      {forms.map((form) => <Formbox title={form.title} button={'Edit form'} onClick={() => setEditForm(form._id)} />)}
+    </div>
+
   )
 }
 
