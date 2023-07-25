@@ -9,10 +9,10 @@ import { usePostRequest } from '../../hooks/useApiCalls'
 
 const CreateForm = () => {
    
-    const schema = { title: '', descrition: '', elements: [{ type: 'text', label: '', options: [] }] }
+    const schema = { title: '', description: '', elements: [{ type: 'text', label: '', options: [] }] }
     const [created, setcreated] = useState(false);
     const [form, setFrom] = useState(schema);
-    const [postRequest, error] = usePostRequest('/create-form', form);
+    const [postRequest, error] = usePostRequest('/create-form');
 
 
     const handleTitleChange = (e) => {
@@ -20,7 +20,7 @@ const CreateForm = () => {
 
     }
     const handleDescriptionChange = (e) => {
-        setFrom({ ...form, descrition: e.target.value })
+        setFrom({ ...form, description: e.target.value })
     }
     const handleCreateForm = () => {
         if(form.title===''){
@@ -39,7 +39,7 @@ const CreateForm = () => {
         }
        
         toast('Saving...')
-        const response = await postRequest();
+        const response = await postRequest(form);
 
 
         if (error) {
@@ -63,7 +63,7 @@ const CreateForm = () => {
             </>
                 : <>
                     <Input value={form.title} onChange={handleTitleChange} />
-                    <Description value={form.descrition} onChange={handleDescriptionChange} />
+                    <Description value={form.description} onChange={handleDescriptionChange} />
                     <Button onClick={handleCreateForm} text={'Create Form'} />
                 </>}
         </div>

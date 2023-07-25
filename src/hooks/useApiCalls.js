@@ -5,10 +5,10 @@ export const usePostRequest = (endpoint,formData) => {
     
 
     const [error, setError] = useState('')
-    const postRequest = async () => {
+    const postRequest = async (data) => {
         try {
 
-            const response =await  axios.post(`${url}${endpoint}`, formData);
+            const response =await  axios.post(`${url}${endpoint}`, data);
             return response.data;
 
         } catch (error) {

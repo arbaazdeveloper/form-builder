@@ -1,13 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import ViewForm from '../pages/ViewForm/ViewForm'
 
 
 const FormViewRoutes = () => {
     const id=useParams()
   return (
-    <div>
-  <h1>Hi iam form  with id {id.id}</h1>
-    </div>
+    <>
+    <ViewForm id={id.id}/>
+    </>
   )
 }
 

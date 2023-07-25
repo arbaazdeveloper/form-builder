@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 
 const Editor = () => {
     const id = useParams();
-    const schema = { title: 'Loading..', descrition: '', elements: [{ type: 'text', label: '', options: [] }] }
+    const schema = { title: 'Loading..', description: '', elements: [{ type: 'text', label: '', options: [] }] }
     const [form, setForm] = useState(schema)
     const [getRequest, error] = useGetRequest(`/get-form/${id.id}`);
     const [putRequest,err]=usePutRequest(`/update-form/${id.id}`,form);
