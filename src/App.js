@@ -13,13 +13,14 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-        <Route path='/' element={<FormBuilderRoutes/>}>
+        <Route path='/*' element={<FormBuilderRoutes/>}>
 
         </Route>
 
         <Route path='/view-form/:id' element={<FormViewRoutes/>}>
 
         </Route>
+        
 
         </Routes>
         <Toaster/>

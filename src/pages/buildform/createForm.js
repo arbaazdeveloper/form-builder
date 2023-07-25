@@ -30,7 +30,7 @@ const CreateForm = () => {
                 : <>
                     <Input value={form.title} onChange={handleTitleChange} />
                     <Description value={form.descrition} onChange={handleDescriptionChange} />
-                    <Button onClick={handleCreateForm} />
+                    <Button onClick={handleCreateForm} text={'Create Form'} />
                 </>}
         </div>
     )
