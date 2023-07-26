@@ -1,4 +1,4 @@
 [[redirects]]
-from = "/*"
-to = "/"
+from = "/view-form/*"
+to = "/view-form/*"
 status = 200
