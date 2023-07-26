@@ -6,6 +6,9 @@ import FormBuilder from './FormBuilder'
 
 import { toast } from 'react-hot-toast'
 import { usePostRequest } from '../../hooks/useApiCalls'
+import Modal from '../../components/Modal'
+import Lightbutton from '../../components/Lightbutton'
+import { frontEnd } from '../../urls/BackendUrls'
 
 const CreateForm = () => {
    
@@ -13,6 +16,8 @@ const CreateForm = () => {
     const [created, setcreated] = useState(false);
     const [form, setFrom] = useState(schema);
     const [postRequest, error] = usePostRequest('/create-form');
+    const [isOpen,setIsOpen]=useState(false);
+    const [formlink,setFormLink]=useState('');
 
 
     const handleTitleChange = (e) => {
@@ -52,13 +57,31 @@ const CreateForm = () => {
 
         if (response.message === 'form created') {
             toast.success('form created sucessfully !')
+            setFormLink(`${frontEnd}/view-form/${response.form._id}`)
         }
+
+    }
+    const handleModal=()=>{
+        if(!formlink){
+            toast.error('Please Save Form First !')
+            return
+        }
+        if(isOpen){
+
+            setIsOpen(false)
+        }else{
+            setIsOpen(true)
+        }
+    }
+    const handleCopy=()=>{
+       navigator.clipboard.writeText(formlink)
+       toast.success('Copied to clipboard !')
 
     }
     return (
         <div className='w-full'>
             {created ? <>
-                <FormBuilder form={form} setForm={setFrom} onSave={handleSave} />
+                <FormBuilder form={form} setForm={setFrom} onSave={handleSave} lightBtnText={'Share'} onLightBtn={handleModal} />
 
             </>
                 : <>
@@ -66,6 +89,17 @@ const CreateForm = () => {
                     <Description value={form.description} onChange={handleDescriptionChange} />
                     <Button onClick={handleCreateForm} text={'Create Form'} />
                 </>}
+        <Modal isOpen={isOpen} onClose={handleModal}>
+            <div className='w-[400px] border-b border-t flex flex-col py-2 my-4'>
+                <input type='text' className='p-2 border rounded m-2'  readOnly value={formlink}/>
+
+                <div className='flex gap-[5px] '>
+                <button onClick={handleCopy} type="button"className="px-5 mb-2 py- text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Copy</button>
+                 <Lightbutton text={'Cancel'} onClick={handleModal}></Lightbutton>
+                </div>
+            </div>
+
+        </Modal>
         </div>
     )
 }

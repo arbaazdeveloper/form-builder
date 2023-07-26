@@ -12,7 +12,7 @@ const ViewForm = ({ id }) => {
   const [postRequest, err] = usePostRequest(`/save-response/${id}`)
   const schema = { title: 'Loading..', description: '', elements: [{ type: 'text', label: '', options: [] }] }
   const [form, setForm] = useState(schema);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({})
 
@@ -37,17 +37,17 @@ const ViewForm = ({ id }) => {
       let data = { key: key, value: formData[key] }
       filteredData.push(data)
     }
-   
+
     const response = await postRequest({ response: filteredData });
-    if(err){
+    if (err) {
       toast.error('Something Went Wrong !')
     }
-    if(response){
-      navigate('/thanks/'+id)
+    if (response) {
+      navigate('/thanks/' + id)
 
     }
 
-    
+
 
 
   }
@@ -56,9 +56,19 @@ const ViewForm = ({ id }) => {
   useEffect(() => {
     const getForm = async () => {
       const response = await getRequest();
+      
+      if (error) {
+        toast.error('Something Went Wrong !')
+      }
+
+      if(!response){
+        navigate('/not-found')
+        return
+      }
       setForm(response);
 
-      initializeFormData(response.elements)
+      initializeFormData(response.elements);
+
 
 
 
@@ -70,8 +80,10 @@ const ViewForm = ({ id }) => {
   return (
     <div className='w-[60%] m-auto'>
 
-      <h1 className='text-[20px]'>{form.title}</h1>
-      <p>{form.description}</p>
+      <div className='bg-lighColor border-t-[4px] border-themeColor p-4 '>
+        <h1 className='text-[30px]'>{form.title}</h1>
+        <p>{form.description}</p>
+      </div>
 
       {form.elements.map((item, index) => {
         return <>
@@ -99,7 +111,10 @@ const ViewForm = ({ id }) => {
 
 
       })}
-      <Button text='save response' onClick={handleSaveResponse} />
+      <div className='my-4'>
+
+        <Button text='save response' onClick={handleSaveResponse} />
+      </div>
     </div>
   )
 }

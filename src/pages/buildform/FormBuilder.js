@@ -1,10 +1,11 @@
 import React from 'react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
+import Lightbutton from '../../components/Lightbutton'
 
 
 
-const FormBuilder = ({ form, setForm, onSave }) => {
+const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn}) => {
 
     const handleTypeChange = (index, type) => {
         const updatedElements = [...form.elements];
@@ -109,6 +110,7 @@ const FormBuilder = ({ form, setForm, onSave }) => {
                 <button onClick={handleAddQuestion} className='mt-4 text-[20px] text-themeColor'>+ Question</button>
             </div>
             <Button onClick={onSave} text='Save'></Button>
+            <Lightbutton text={lightBtnText} onClick={onLightBtn}></Lightbutton>
         </div>
     )
 }
