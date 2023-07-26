@@ -20,6 +20,7 @@ const CreateForm = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [formlink, setFormLink] = useState('');
     const [image, setImage] = useState('');
+    
 
 
     const handleTitleChange = (e) => {
@@ -46,40 +47,40 @@ const CreateForm = () => {
         }
 
         toast('Saving...')
-        if(image){
+        if (image) {
             const upload = await imageUpload(image)
             if (upload.status === 200) {
                 await setFrom({ ...form, image: upload.data.url })
                 const updatedForm = { ...form, image: upload.data.url }
                 const response = await postRequest(updatedForm);
                 if (error) {
-                    
+
                     return toast.error('Something Went Wrong !')
                 }
-    
-    
-    
-    
+
+
+
+
                 if (response.message === 'form created') {
                     toast.success('form created sucessfully !')
                     setFormLink(`${frontEnd}/view-form/${response.form._id}`)
                 }
-    
+
             } else {
                 toast.error('something went wrong')
             }
-        }else{
+        } else {
             const response = await postRequest(form);
-                if (error) {
-                    
-                    return toast.error('Something Went Wrong !')
-                }
-                if (response.message === 'form created') {
-                    toast.success('form created sucessfully !')
-                    setFormLink(`${frontEnd}/view-form/${response.form._id}`)
-                }
+            if (error) {
+
+                return toast.error('Something Went Wrong !')
+            }
+            if (response.message === 'form created') {
+                toast.success('form created sucessfully !')
+                setFormLink(`${frontEnd}/view-form/${response.form._id}`)
+            }
         }
-       
+
 
 
 
@@ -105,7 +106,7 @@ const CreateForm = () => {
     return (
         <div className='w-full'>
             {created ? <>
-                <FormBuilder form={form} setForm={setFrom} onSave={handleSave} lightBtnText={'Share'} onLightBtn={handleModal} image={image} setImage={setImage} />
+                <FormBuilder form={form} setForm={setFrom} onSave={handleSave} lightBtnText={'Share'} onLightBtn={handleModal} image={image} setImage={setImage} builderType={'create'} />
 
             </>
                 : <>
@@ -124,6 +125,7 @@ const CreateForm = () => {
                 </div>
 
             </Modal>
+          
         </div>
     )
 }

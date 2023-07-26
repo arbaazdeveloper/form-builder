@@ -9,7 +9,7 @@ import Lightbutton from '../../components/Lightbutton';
 const ViewResponse = () => {
     const [formResponse, setFormResponse] = useState([{ response: [{ key: '', value: '' }] }]);
     const [found, setFound] = useState(true);
-    const id = useParams();
+    const formId = useParams();
     const [isOpen,setIsOpen]=useState(false);
     const handleModal=()=>{
        
@@ -21,7 +21,7 @@ const ViewResponse = () => {
         }
     }
     const handleCopy=()=>{
-       navigator.clipboard.writeText(`${frontEnd}/view-form/${id.id}`)
+       navigator.clipboard.writeText(`${frontEnd}/view-form/${formId.id}`)
        toast.success('Copied to clipboard !')
 
     }
@@ -30,7 +30,7 @@ const ViewResponse = () => {
     useEffect(() => {
         const getResponse = async () => {
             try {
-                const res = await fetch(`${url}/get-response/${id.id}`)
+                const res = await fetch(`${url}/get-response/${formId.id}`)
                 const data = await res.json();
                 if (data.message === 'No Response Found For This Form') {
                     setFound(false)
@@ -45,13 +45,13 @@ const ViewResponse = () => {
         }
         getResponse()
 
-    }, [id.id])
+    }, [formId.id])
     return (
 
         <div className="relative overflow-x-auto w-full">
             {!found && <h1 className='text-[30px] text-center'>No Responses Found</h1>}
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 w-[200px]">
+            <table className="w-full text-sm text-left text-gray-500 no:text-gray-400 overflow-auto">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 no:bg-gray-700 no:text-gray-400 w-[200px]">
                     <tr>
                         {formResponse[formResponse.length-1].response.map((item) => {
                             
@@ -64,7 +64,7 @@ const ViewResponse = () => {
                 </thead>
                 <tbody>
                     {formResponse.map((item) => {
-                        return <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        return <tr className="bg-white border-b ">
                             {item.response.map((element) => {
                                 return <td className="px-6 py-4">
                                     {element.value}
@@ -79,10 +79,10 @@ const ViewResponse = () => {
             </table>
             <Modal isOpen={isOpen} onClose={handleModal}>
                 <div className='w-[400px] border-b border-t flex flex-col py-2 my-4'>
-                    <input type='text' className='p-2 border rounded m-2' readOnly value={`${frontEnd}/view-form/${id.id}`} />
+                    <input type='text' className='p-2 border rounded m-2' readOnly value={`${frontEnd}/view-form/${formId.id}`} />
 
                     <div className='flex gap-[5px] '>
-                        <button onClick={handleCopy} type="button" className="px-5 mb-2 py- text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Copy</button>
+                        <button onClick={handleCopy} type="button" className="px-5 mb-2 py- text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center no:bg-blue-600 no:hover:bg-blue-700 no:focus:ring-blue-800">Copy</button>
                         <Lightbutton text={'Cancel'} onClick={handleModal}></Lightbutton>
                     </div>
                 </div>

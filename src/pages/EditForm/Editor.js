@@ -80,7 +80,7 @@ const Editor = () => {
     return (
         <>
             <div className='w-full'>
-                <FormBuilder form={form} setForm={setForm} onSave={handleUpdate} lightBtnText={'Delete'} onLightBtn={handleOpenModal} image={'not allowed'}/>
+                <FormBuilder form={form} setForm={setForm} onSave={handleUpdate} lightBtnText={'Delete'} onLightBtn={handleOpenModal} image={'not allowed'} builderType={'edit'}/>
                 <Modal isOpen={open} onClose={handleOpenModal}>
                     <div className='w-[400px] border-b border-t flex flex-col py-2 my-4'>
                         <p className='py-4'>Are You Sure You Want To Delete this form !</p>

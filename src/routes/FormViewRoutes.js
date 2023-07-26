@@ -4,10 +4,10 @@ import ViewForm from '../pages/ViewForm/ViewForm'
 
 
 const FormViewRoutes = () => {
-    const id=useParams()
+    const formId=useParams()
   return (
     <>
-    <ViewForm id={id.id}/>
+    <ViewForm id={formId.id}/>
     </>
   )
 }

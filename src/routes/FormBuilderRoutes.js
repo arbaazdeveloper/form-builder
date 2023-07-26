@@ -15,8 +15,11 @@ const FormBuilderRoutes = () => {
     return (
         <>
         <Header/>
+          
+
             <Navbar/>
-            <div className='flex  w-[60%] m-auto'>
+        
+            <div className='w-[80%] flex  sm:w-[60%] m-auto'>
 
                 <Routes>
                     <Route path='/' element={<BuildForm />}>

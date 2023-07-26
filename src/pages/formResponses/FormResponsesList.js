@@ -29,7 +29,7 @@ const FormResponsesList = () => {
     <div className='flex flex-col w-full gap-[5px]'>
     {loading && <h1 className='text-center text-[30px]'>Loading...</h1>}
     {!loading && forms.length === 0 && <h1 className='text-center text-[30px]'>No Forms Found</h1>}
-    {forms.map((form) => <Formbox title={form.title} key={form._id} button={'View Response'} onClick={() => setEditForm(form._id)} />)}
+    {forms.map((form) => <Formbox title={form.title} key={form._id} formId={form._id} button={'View Response'} onClick={() => setEditForm(form._id)} />)}
   </div>
   )
 }
