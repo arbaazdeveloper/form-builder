@@ -5,7 +5,7 @@ import Lightbutton from '../../components/Lightbutton'
 
 
 
-const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn}) => {
+const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn }) => {
 
     const handleTypeChange = (index, type) => {
         const updatedElements = [...form.elements];
@@ -66,7 +66,7 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn}) => {
             </div>
 
             {form.elements.map((item, index) => {
-                return <div className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
+                return <div key={item._id} className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
                     <Input label='Question' value={item.label} onChange={(e) => handleLabelChange(e, index)} />
 
                     {item.type === 'text' && <>
@@ -77,7 +77,7 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn}) => {
                     {item.type === 'radio' && <>
 
                         <div className='flex flex-col gap-[5px] mt-1'>
-                            {item.options.map((option, optionIndex) => <div className='flex gap-[2px]'>
+                            {item.options.map((option, optionIndex) => <div key={option} className='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
                                 <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
                             </div>)}
@@ -86,8 +86,8 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn}) => {
 
                     </>}
                     {item.type === 'select' && <>
-                          <div className='flex flex-col gap-[5px] mt-1'>
-                            {item.options.map((option, optionIndex) => <div className='flex gap-[2px]'>
+                        <div className='flex flex-col gap-[5px] mt-1'>
+                            {item.options.map((option, optionIndex) => <div key={option}  className='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
                                 <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
                             </div>)}

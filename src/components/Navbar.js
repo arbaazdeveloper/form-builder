@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const location=useLocation();
-  console.log(location)
+  
   return (
     <div className='h-[100px]  flex justify-center w-full items-center'>
         <div className='flex bg-[#f0f0ef] p-[10px] rounded w-[60%] justify-center gap-[10px]'>
