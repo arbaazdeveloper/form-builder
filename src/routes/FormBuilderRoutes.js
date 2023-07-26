@@ -25,7 +25,7 @@ const FormBuilderRoutes = () => {
 
 
                     </Route>
-                    <Route path='/edit-form/:id' element={<Editor />}>
+                    <Route exact path='/edit-form/:id' element={<Editor />}>
 
 
                     </Route>
