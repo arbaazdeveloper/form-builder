@@ -81,8 +81,14 @@ const ViewForm = ({ id }) => {
     <div className='w-[60%] m-auto'>
 
       <div className='bg-lighColor border-t-[4px] border-themeColor p-4 '>
+        <div className='flex gap-[10px]'>
+          <img className='h-[100px] w-[100px] rounded-full' src={form.image} alt='logo'/>
+          <div>
+
         <h1 className='text-[30px]'>{form.title}</h1>
         <p>{form.description}</p>
+          </div>
+        </div>
       </div>
 
       {form.elements.map((item, index) => {

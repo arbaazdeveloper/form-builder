@@ -7,12 +7,14 @@ import EditForm from '../pages/EditForm/EditForm';
 import Editor from '../pages/EditForm/Editor';
 import FormResponsesList from '../pages/formResponses/FormResponsesList';
 import ViewResponse from '../pages/formResponses/ViewResponse';
+import Header from '../pages/Header';
 
 
 const FormBuilderRoutes = () => {
     
     return (
         <>
+        <Header/>
             <Navbar/>
             <div className='flex  w-[60%] m-auto'>
 

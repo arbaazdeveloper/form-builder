@@ -5,7 +5,7 @@ import Lightbutton from '../../components/Lightbutton'
 
 
 
-const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn }) => {
+const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, setImage }) => {
 
     const handleTypeChange = (index, type) => {
         const updatedElements = [...form.elements];
@@ -55,14 +55,51 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn }) => {
         setForm({ ...form, elements: previous })
 
     }
+    const insertImage = (e) => {
+        setImage(e.target.files[0])
 
-
+    }
 
     return (
         <div>
-            <div className='bg-lighColor border-t-[4px] border-themeColor p-4 '>
+            <div className='bg-lighColor border-t-[4px] border-themeColor p-4 flex items-start gap-[10px]'>
+
+                {image ? (
+                    <img
+                        src={image==='not allowed'?'':URL.createObjectURL(image)}
+                        alt="Selected"
+                        className='h-[100px] w-[100px] rounded-full'
+                    />
+                ) : (
+                    <>
+                    
+                    <label htmlFor="imageUpload" className="rounded ">
+                    <img
+                        src={form.image}
+                        alt="Selected"
+                        className='h-[100px] w-[100px] rounded-full'
+                    />
+                        <span>Select an Image</span>
+                    </label>
+                    {!image==='not allowed' &&  <img
+                        src={form.image}
+                        alt="Selected"
+                        className='h-[100px] w-[100px] rounded-full'
+                    />}
+                    </>
+                )}
+                <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    onChange={insertImage}
+                    style={{ display: 'none' }}
+                />
+                <div>
+
                 <h1 className='text-[30px]'>{form.title}</h1>
                 <p>{form.description}</p>
+                </div>
             </div>
 
             {form.elements.map((item, index) => {
@@ -77,17 +114,17 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn }) => {
                     {item.type === 'radio' && <>
 
                         <div className='flex flex-col gap-[5px] mt-1'>
-                            {item.options.map((option, optionIndex) =><> <div lassName='flex gap-[2px]'>
+                            {item.options.map((option, optionIndex) => <> <div lassName='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
                                 <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
-                            </div></> )}
+                            </div></>)}
                             <button className='w-[120px] bg-white p-2' onClick={() => handleAddOption(index)} >Add Options +</button>
                         </div>
 
                     </>}
                     {item.type === 'select' && <>
                         <div className='flex flex-col gap-[5px] mt-1'>
-                            {item.options.map((option, optionIndex) =><> <div className='flex gap-[2px]'>
+                            {item.options.map((option, optionIndex) => <> <div className='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
                                 <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
                             </div></>)}
