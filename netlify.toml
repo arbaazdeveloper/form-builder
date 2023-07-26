@@ -1,4 +1,4 @@
 [[redirects]]
 from = "/view-form/*"
-to = "/view-form/:id"
-statu = 200
+to = "/"
+status = 200
