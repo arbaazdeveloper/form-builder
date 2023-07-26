@@ -157,14 +157,14 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, s
                         <div className='flex flex-col gap-[5px] mt-1'>
                             {item.options.map((option, optionIndex) => <> <div className='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
-                                <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
+                                <button className='mx-2 mt-2' onClick={() => handleDeleteOption(index, optionIndex)}><CloseIcon /></button>
                             </div></>)}
                             <button className='w-[120px] bg-white p-2' onClick={() => handleAddOption(index)} >Add Options +</button>
                         </div>
                     </>}
 
                     <div>
-                        <select className='p-4 rounded mt-4' onChange={(e) => handleTypeChange(index, e.target.value)}>
+                        <select className='p-4 rounded mt-4' defaultValue={item.type} onChange={(e) => handleTypeChange(index, e.target.value)}>
                             <option value={'text'}>Text</option>
                             <option value={'radio'}>Radio Group</option>
                             <option value={'select'}>Select</option>
