@@ -77,20 +77,20 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn }) => {
                     {item.type === 'radio' && <>
 
                         <div className='flex flex-col gap-[5px] mt-1'>
-                            {item.options.map((option, optionIndex) => <div key={option} className='flex gap-[2px]'>
+                            {item.options.map((option, optionIndex) =><> <div lassName='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
                                 <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
-                            </div>)}
+                            </div></> )}
                             <button className='w-[120px] bg-white p-2' onClick={() => handleAddOption(index)} >Add Options +</button>
                         </div>
 
                     </>}
                     {item.type === 'select' && <>
                         <div className='flex flex-col gap-[5px] mt-1'>
-                            {item.options.map((option, optionIndex) => <div key={option}  className='flex gap-[2px]'>
+                            {item.options.map((option, optionIndex) =><> <div className='flex gap-[2px]'>
                                 <input className='p-2' onChange={(e) => handleOptionValueChange(e, index, optionIndex)} value={option}></input>
                                 <button onClick={() => handleDeleteOption(index, optionIndex)}>X</button>
-                            </div>)}
+                            </div></>)}
                             <button className='w-[120px] bg-white p-2' onClick={() => handleAddOption(index)} >Add Options +</button>
                         </div>
                     </>}
