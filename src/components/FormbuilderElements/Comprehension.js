@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MCQ from './MCQ'
 import Lightbutton from '../Lightbutton'
 
-const Comprehension = () => {
+const Comprehension = ({form,setForm,elementIndex}) => {
   const [state, setState] = useState({ passage: '', subQuestions: [{ questionText: 'Question', options: [{ id: '1', text: 'one' }, { id: '2', text: 'two' }] }] })
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
+    let previous=[...form.extras]
+    previous[elementIndex].passage=e.target.value
+    setForm({...form,extras:previous})
   }
   const addMcq = () => {
     const subQuestionShema = { questionText: 'Question', options: [{ id: '1', text: 'one' }, { id: '2', text: 'two' }] }
@@ -23,6 +26,11 @@ const Comprehension = () => {
    
 
   }
+  useEffect(()=>{
+    let previous=[...form.extras]
+    previous[elementIndex]=state
+    setForm({...form,extras:previous})
+  },[state])
 
   return (
     <>

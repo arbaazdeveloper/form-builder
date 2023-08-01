@@ -5,6 +5,7 @@ import Lightbutton from '../../components/Lightbutton'
 import { CloseIcon } from '../../assets/Icons'
 import Comprehension from '../../components/FormbuilderElements/Comprehension'
 import Categorize from '../../components/FormbuilderElements/Categorize'
+import Cloze from '../../components/FormbuilderElements/Cloze'
 
 
 const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, setImage, builderType }) => {
@@ -66,7 +67,8 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, s
         SELECT: 'select',
         RADIO: 'radio',
         COMPREHENSION: 'comprehension',
-        CATEGORIZE:'categorize'
+        CATEGORIZE:'categorize',
+        CLOZE:'cloze'
     }
 
     return (
@@ -169,23 +171,29 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, s
                     </>}
                     {
                         item.type === inputType.COMPREHENSION && <>
-                            <Comprehension />
+                            <Comprehension form={form} setForm={setForm} elementIndex={index}/>
 
                         </>
                     }
                      {
                         item.type === inputType.CATEGORIZE && <>
-                            <Categorize/>
+                            <Categorize form={form} setForm={setForm} elementIndex={index}/>
 
+                        </>
+                    }
+                    {
+                        item.type===inputType.CLOZE && <>
+                        <Cloze form={form} setForm={setForm} elementIndex={index}/>
                         </>
                     }
 
                     <div>
                         <select className='p-4 rounded mt-4' defaultValue={item.type} onChange={(e) => handleTypeChange(index, e.target.value)}>
-                            <option value={'text'}>Text</option>
-                            <option value={'radio'}>Radio Group</option>
                             <option value={'comprehension'}>Comprehension</option>
                             <option value={'categorize'}>Categorize</option>
+                            <option value={'cloze'}>Cloze (Fill in the blanks)</option>
+                            <option value={'text'}>Text</option>
+                            <option value={'radio'}>Radio Group</option>
                             <option value={'select'}>Select</option>
                         </select>
                     </div>

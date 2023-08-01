@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GridIcon } from '../../assets/Icons'
 import Drag from '../Drag'
 import { Draggable } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
 
-const Categorize = () => {
+const Categorize = ({form,setForm,elementIndex}) => {
     const categorizeSchema = { categories: [{ id: 'one', categoryName: '' }, { id: 'two', categoryName: '' }], items: [{ id: 'one', itemName: '', belongsTo: '' }, { id: 'two', itemName: '', belongsTo: '' }] }
     const [state, setState] = useState(categorizeSchema);
     const handleItemNameChange = (e, nameIndex) => {
@@ -41,13 +41,18 @@ const Categorize = () => {
 
     }
     const addItem = () => {
-        const uniqueItemId = uuidv4
+        const uniqueItemId = uuidv4()
         const newItem = { id: uniqueItemId, itemName: '', belongsTo: '' }
         let copiedItems = [...state.items]
         copiedItems = copiedItems.concat(newItem)
         setState({ ...state, items: copiedItems })
 
     }
+    useEffect(()=>{
+        let previous=[...form.extras]
+        previous[elementIndex]=state
+        setForm({...form,extras:previous})
+    },[state])
     return (
         <>
             <div className='flex flex-col gap-[10px]'>

@@ -13,7 +13,7 @@ import { imageUpload } from '../../hooks/uploadImage'
 
 const CreateForm = () => {
 
-    const schema = { title: '', image: 'https://res.cloudinary.com/dxknbk2hd/image/upload/v1690386765/Screenshot_2023-07-26_211534_1_njq0cq.png', description: '', elements: [{ type: 'text', label: '', options: [] }] }
+    const schema = { title: '', image: 'https://res.cloudinary.com/dxknbk2hd/image/upload/v1690386765/Screenshot_2023-07-26_211534_1_njq0cq.png', description: '', elements: [{ type: 'text', label: '', options: [] }],extras:[] }
     const [created, setcreated] = useState(false);
     const [form, setFrom] = useState(schema);
     const [postRequest, error] = usePostRequest('/create-form');
@@ -38,7 +38,7 @@ const CreateForm = () => {
         setcreated(true)
     }
     const handleSave = async () => {
-
+               console.log(form)
         for (let i = 0; i < form.elements.length; i++) {
             if (form.elements[i].label === '') {
                 toast.error('Question Cannot be empty !')
