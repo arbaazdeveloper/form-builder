@@ -3,6 +3,7 @@ import { GridIcon } from '../../assets/Icons'
 import Input from '../Input'
 import { Draggable } from 'react-beautiful-dnd'
 import Drag from '../Drag'
+import { v4 as uuidv4 } from 'uuid';
 
 
 const MCQ = ({ questionText, options, onChange, onDragEnd, setState, currentState, index }) => {
@@ -28,12 +29,13 @@ const MCQ = ({ questionText, options, onChange, onDragEnd, setState, currentStat
 
     }
     const addOption = () => {
-        const newOption = { id: 'iid', text: 'one' }
+        const uniqueId = uuidv4
+        const newOption = { id: uniqueId, text: 'new option' }
         let prevOption = [...options]
-        prevOption=prevOption.concat(newOption);
-        const prevQuestion={...currentState.subQuestions,options:prevOption}
-        
-        setState({...currentState,subQuestions:prevQuestion})
+        prevOption = prevOption.concat(newOption);
+        const prevSubquestion = [...currentState.subQuestions]
+        prevSubquestion[index].options = prevOption
+        setState({ ...currentState, subQuestions: prevSubquestion })
 
 
 

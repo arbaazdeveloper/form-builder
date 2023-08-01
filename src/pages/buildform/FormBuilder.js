@@ -4,6 +4,7 @@ import Button from '../../components/Button'
 import Lightbutton from '../../components/Lightbutton'
 import { CloseIcon } from '../../assets/Icons'
 import Comprehension from '../../components/FormbuilderElements/Comprehension'
+import Categorize from '../../components/FormbuilderElements/Categorize'
 
 
 const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, setImage, builderType }) => {
@@ -64,7 +65,8 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, s
         TEXT: 'text',
         SELECT: 'select',
         RADIO: 'radio',
-        COMPREHENSION: 'comprehension'
+        COMPREHENSION: 'comprehension',
+        CATEGORIZE:'categorize'
     }
 
     return (
@@ -171,13 +173,20 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, s
 
                         </>
                     }
+                     {
+                        item.type === inputType.CATEGORIZE && <>
+                            <Categorize/>
+
+                        </>
+                    }
 
                     <div>
                         <select className='p-4 rounded mt-4' defaultValue={item.type} onChange={(e) => handleTypeChange(index, e.target.value)}>
                             <option value={'text'}>Text</option>
                             <option value={'radio'}>Radio Group</option>
-                            <option value={'select'}>Select</option>
                             <option value={'comprehension'}>Comprehension</option>
+                            <option value={'categorize'}>Categorize</option>
+                            <option value={'select'}>Select</option>
                         </select>
                     </div>
 
