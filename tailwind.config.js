@@ -11,7 +11,9 @@ module.exports = {
     extend: {
       colors:{
         themeColor:'#5cbdb9',
-        lighColor:'#f0f0ef'
+        lighColor:'#f0f0ef',
+        lightGreen:'#90EE90',
+        lightBlue:'#87CEEB'
       }
     },
   },

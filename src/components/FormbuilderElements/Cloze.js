@@ -4,7 +4,7 @@ import { GridIcon } from '../../assets/Icons';
 import Drag from '../Drag';
 import { Draggable } from 'react-beautiful-dnd';
 
-const Cloze = ({ form, setForm, elementIndex }) => {
+const Cloze = ({ form, setForm, elementIndex ,type}) => {
     const clozeShema = { sentence: '', selectedWords: [] };
     const [state, setState] = useState(clozeShema);
     const [field, setField] = useState({ __html: '' });
@@ -54,6 +54,12 @@ const Cloze = ({ form, setForm, elementIndex }) => {
           previous[elementIndex]=state
           setForm({...form,extras:previous})
     },[state])
+    
+    useEffect(()=>{
+        if(type==='edit'){
+            setState(form.extras[elementIndex])
+        }
+    },[])
 
 
     return (

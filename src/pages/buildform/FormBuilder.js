@@ -171,19 +171,19 @@ const FormBuilder = ({ form, setForm, onSave, lightBtnText, onLightBtn, image, s
                     </>}
                     {
                         item.type === inputType.COMPREHENSION && <>
-                            <Comprehension form={form} setForm={setForm} elementIndex={index}/>
+                            <Comprehension form={form} setForm={setForm} elementIndex={index} type={builderType}/>
 
                         </>
                     }
                      {
                         item.type === inputType.CATEGORIZE && <>
-                            <Categorize form={form} setForm={setForm} elementIndex={index}/>
+                            <Categorize form={form} setForm={setForm} elementIndex={index} type={builderType}/>
 
                         </>
                     }
                     {
                         item.type===inputType.CLOZE && <>
-                        <Cloze form={form} setForm={setForm} elementIndex={index}/>
+                        <Cloze form={form} setForm={setForm} elementIndex={index} type={builderType}/>
                         </>
                     }
 

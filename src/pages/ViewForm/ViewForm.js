@@ -7,13 +7,14 @@ import Button from '../../components/Button';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal';
+import CategorizeRenderer from '../../components/Formrenderelements/CategorizeRenderer';
 
 const ViewForm = ({ id }) => {
   const [getRequest, error] = useGetRequest(`/get-form/${id}`);
   const [postRequest, err] = usePostRequest(`/save-response/${id}`)
   const schema = { title: 'Loading..', description: '', elements: [{ type: 'text', label: '', options: [] }] }
   const [form, setForm] = useState(schema);
-  const [open,setOpen]=useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({})
@@ -58,7 +59,10 @@ const ViewForm = ({ id }) => {
   const inputType = {
     TEXT: 'text',
     SELECT: 'select',
-    RADIO: 'radio'
+    RADIO: 'radio',
+    COMPREHENSION: 'comprehension',
+    CATEGORIZE: 'categorize',
+    CLOZE: 'cloze'
   }
 
 
@@ -77,6 +81,7 @@ const ViewForm = ({ id }) => {
       setForm(response);
 
       initializeFormData(response.elements);
+      console.log(form)
 
 
 
@@ -122,6 +127,14 @@ const ViewForm = ({ id }) => {
               <RadioGroup options={item.options} label={item.label} onChange={(e) => handleInputChange(item.label, e.target.value)} />
             </div>
           </>}
+          {item.type === inputType.CATEGORIZE && <>
+            <div className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
+              <p>{item.label}</p>
+              <CategorizeRenderer data={form.extras[index]} />
+            </div>
+          </>}
+
+
         </>
 
 
@@ -131,7 +144,7 @@ const ViewForm = ({ id }) => {
         <Button text='save response' onClick={handleSaveResponse} />
       </div>
 
-      <Modal isOpen={open} onClose={()=>setOpen(false) }>
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
         <h1 className='text-[20px]'>Saving Response Please Wait.....</h1>
 
       </Modal>

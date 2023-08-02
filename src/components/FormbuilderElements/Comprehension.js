@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MCQ from './MCQ'
 import Lightbutton from '../Lightbutton'
 
-const Comprehension = ({form,setForm,elementIndex}) => {
+const Comprehension = ({form,setForm,elementIndex,type}) => {
   const [state, setState] = useState({ passage: '', subQuestions: [{ questionText: 'Question', options: [{ id: '1', text: 'one' }, { id: '2', text: 'two' }] }] })
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -31,6 +31,12 @@ const Comprehension = ({form,setForm,elementIndex}) => {
     previous[elementIndex]=state
     setForm({...form,extras:previous})
   },[state])
+  
+  useEffect(()=>{
+    if(type==='edit'){
+      setState(form.extras[elementIndex])
+    }
+  },[])
 
   return (
     <>

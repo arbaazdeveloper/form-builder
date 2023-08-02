@@ -4,7 +4,7 @@ import Drag from '../Drag'
 import { Draggable } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
 
-const Categorize = ({form,setForm,elementIndex}) => {
+const Categorize = ({form,setForm,elementIndex,type}) => {
     const categorizeSchema = { categories: [{ id: 'one', categoryName: '' }, { id: 'two', categoryName: '' }], items: [{ id: 'one', itemName: '', belongsTo: '' }, { id: 'two', itemName: '', belongsTo: '' }] }
     const [state, setState] = useState(categorizeSchema);
     const handleItemNameChange = (e, nameIndex) => {
@@ -53,6 +53,11 @@ const Categorize = ({form,setForm,elementIndex}) => {
         previous[elementIndex]=state
         setForm({...form,extras:previous})
     },[state])
+    useEffect(()=>{
+        if(type==='edit'){
+            setState(form.extras[elementIndex])
+        }
+    },[])
     return (
         <>
             <div className='flex flex-col gap-[10px]'>

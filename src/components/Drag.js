@@ -1,8 +1,8 @@
 import React from 'react'
 import { DragDropContext, Droppable} from "react-beautiful-dnd";
-const Drag = ({ children, onDragEnd }) => {
+const Drag = ({ children, onDragEnd,onDragStart }) => {
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
             <Droppable droppableId="source">
                 {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>

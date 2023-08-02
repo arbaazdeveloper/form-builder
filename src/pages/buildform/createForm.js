@@ -38,7 +38,7 @@ const CreateForm = () => {
         setcreated(true)
     }
     const handleSave = async () => {
-               console.log(form)
+            
         for (let i = 0; i < form.elements.length; i++) {
             if (form.elements[i].label === '') {
                 toast.error('Question Cannot be empty !')
@@ -70,6 +70,7 @@ const CreateForm = () => {
                 toast.error('something went wrong')
             }
         } else {
+            console.log(form)
             const response = await postRequest(form);
             if (error) {
 
