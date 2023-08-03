@@ -8,6 +8,7 @@ import Editor from '../pages/EditForm/Editor';
 import FormResponsesList from '../pages/formResponses/FormResponsesList';
 import ViewResponse from '../pages/formResponses/ViewResponse';
 import Header from '../pages/Header';
+import FullResponse from '../pages/formResponses/FullResponse';
 
 
 const FormBuilderRoutes = () => {
@@ -38,6 +39,10 @@ const FormBuilderRoutes = () => {
 
                     </Route>
                     <Route path='/responses/:id' element={<ViewResponse />}>
+
+
+                    </Route>
+                    <Route path='/full-response/:id' element={<FullResponse />}>
 
 
                     </Route>

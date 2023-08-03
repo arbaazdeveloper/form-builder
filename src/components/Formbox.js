@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import Button from './Button'
 import Lightbutton from './Lightbutton'
-import { ShareIcon } from '../assets/Icons'
+import { EyeIcon, ShareIcon } from '../assets/Icons'
 import Modal from './Modal'
 import { toast } from 'react-hot-toast'
 import { frontEnd } from '../urls/BackendUrls'
+import { Link } from 'react-router-dom'
 
 const Formbox = ({ title, button, onClick, formId }) => {
   const shareLink=`${frontEnd}/view-form/${formId}`
   const [isOpen, setIsOpen] = useState(false);
   const handleModal = () => {
-    console.log('i ran')
+   
 
     if (isOpen) {
 
@@ -29,10 +30,10 @@ const Formbox = ({ title, button, onClick, formId }) => {
       <div>
         <h1>{title}</h1>
       </div>
-      <div>
+      <div className='flex items-center'>
+          <Link to={`/view-form/${formId}`} className='mx-4' title='Preview'><EyeIcon/></Link>
         <Button onClick={onClick} text={button} />
         <Lightbutton onClick={handleModal} text={'Share'} icon={<ShareIcon />}>Share</Lightbutton>
-
       </div>
       <Modal isOpen={isOpen} onClose={handleModal}>
         <div className='w-[400px] border-b border-t flex flex-col py-2 my-4'>

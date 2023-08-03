@@ -8,6 +8,8 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import CategorizeRenderer from '../../components/Formrenderelements/CategorizeRenderer';
+import ClozeRederer from '../../components/Formrenderelements/ClozeRederer';
+import ComprehensionRederer from '../../components/Formrenderelements/ComprehensionRederer';
 
 const ViewForm = ({ id }) => {
   const [getRequest, error] = useGetRequest(`/get-form/${id}`);
@@ -18,6 +20,8 @@ const ViewForm = ({ id }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({})
+  const [extrasResponse,setExtraResponse]=useState([])
+
 
 
   const initializeFormData = (elements) => {
@@ -42,7 +46,7 @@ const ViewForm = ({ id }) => {
       filteredData.push(data)
     }
 
-    const response = await postRequest({ response: filteredData });
+    const response = await postRequest({ response: filteredData,extrasResponse:extrasResponse });
     setOpen(false)
     if (err) {
       toast.error('Something Went Wrong !')
@@ -81,7 +85,7 @@ const ViewForm = ({ id }) => {
       setForm(response);
 
       initializeFormData(response.elements);
-      console.log(form)
+     
 
 
 
@@ -110,7 +114,7 @@ const ViewForm = ({ id }) => {
 
           {item.type === inputType.TEXT && <>
             <div className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
-              <p>{item.label}</p>
+              <p>Q.{index+1} {item.label}</p>
 
               <Input onChange={(e) => handleInputChange(item.label, e.target.value)} value={formData[item.label]} />
 
@@ -129,8 +133,21 @@ const ViewForm = ({ id }) => {
           </>}
           {item.type === inputType.CATEGORIZE && <>
             <div className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
-              <p>{item.label}</p>
-              <CategorizeRenderer data={form.extras[index]} />
+              <p>Q.{index+1} {item.label}</p>
+              <CategorizeRenderer data={form.extras[index]} form={form} setForm={setForm} elementIndex={index}  setExtraResponse={setExtraResponse} extrasResponse={extrasResponse}/>
+            </div>
+          </>}
+          {item.type === inputType.CLOZE && <>
+            <div className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
+              <p>Q.{index+1} {item.label}</p>
+             <ClozeRederer  data={form.extras[index]} form={form} setForm={setForm} elementIndex={index} setExtraResponse={setExtraResponse} extrasResponse={extrasResponse}/>
+            </div>
+          </>}
+
+          {item.type === inputType.COMPREHENSION && <>
+            <div className='bg-lighColor border-t-[4px] border-themeColor p-4 mt-4'>
+              <p>Q.{index+1} {item.label}</p>
+             <ComprehensionRederer data={form.extras[index]} form={form} setForm={setForm} elementIndex={index} setExtraResponse={setExtraResponse} extrasResponse={extrasResponse}/>
             </div>
           </>}
 

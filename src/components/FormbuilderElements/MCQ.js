@@ -41,12 +41,18 @@ const MCQ = ({ questionText, options, onChange, onDragEnd, setState, currentStat
 
 
     }
+    const questionChange=(e,index)=>{
+        let previous=[...currentState.subQuestions]
+        previous[index].questionText=e.target.value
+        setState({...currentState, subQuestions:previous})
+
+    }
 
 
     return (
         <div >
             <p>{questionText}</p>
-            <Input />
+            <Input value={questionText} onChange={(e)=>questionChange(e,index)} />
             <Drag onDragEnd={handleOnDragEnd}>
                 {options.map((item, index) => {
                     return <>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { frontEnd, url } from '../../urls/BackendUrls';
 import Modal from '../../components/Modal';
@@ -43,18 +43,22 @@ const ViewResponse = () => {
 
 
         }
-        getResponse()
+        getResponse();
+        console.log(formResponse)
 
     }, [formId.id])
     return (
+
+    <div>
 
         <div className="relative overflow-x-auto w-full">
             {!found && <h1 className='text-[30px] text-center'>No Responses Found</h1>}
             <table className="w-full text-sm text-left text-gray-500 no:text-gray-400 overflow-auto">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 no:bg-gray-700 no:text-gray-400 w-[200px]">
                     <tr>
+                        
                         {formResponse[formResponse.length-1].response.map((item) => {
-                            
+                           
                             return <th scope="col" className="px-6 py-3 w-[300px]">
                                 {item.key}
                             </th>
@@ -63,12 +67,16 @@ const ViewResponse = () => {
                     </tr>
                 </thead>
                 <tbody>
+              
                     {formResponse.map((item) => {
+                        
                         return <tr className="bg-white border-b ">
-                            {item.response.map((element) => {
+                            {item.response.map((element,index) => {
+                               
                                 return <td className="px-6 py-4">
                                     {element.value}
                                 </td>
+                                
                             })}
 
                         </tr>
@@ -94,6 +102,11 @@ const ViewResponse = () => {
             </div>
 
         </div>
+            <div className='flex justify-center'>
+                <Link className='bg-themeColor p-4 rounded rounded-[10px] text-white' to={`/full-response/${formId.id}`}>View full responses</Link>
+
+            </div>
+    </div>
 
     )
 }
