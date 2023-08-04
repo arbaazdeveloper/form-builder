@@ -63,7 +63,7 @@ const ComprehensionRederer = ({data, form, setForm, elementIndex,extrasResponse,
 
           </div>
         })}
-        <button onClick={()=>console.log(state)}>test</button>
+      
 
       </div>
     </div>

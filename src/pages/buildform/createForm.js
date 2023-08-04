@@ -70,7 +70,7 @@ const CreateForm = () => {
                 toast.error('something went wrong')
             }
         } else {
-            console.log(form)
+          
             const response = await postRequest(form);
             if (error) {
 

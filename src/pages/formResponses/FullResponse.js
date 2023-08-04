@@ -55,7 +55,7 @@ const FullResponse = () => {
         getResponse();
         
     }, [formId.id])
-    console.log(formResponse)
+
     const responseType={
         TEXT: 'text',
         SELECT: 'select',

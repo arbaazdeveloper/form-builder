@@ -23,7 +23,7 @@ const Editor = () => {
                 return
             }
         }
-        console.log(form)
+     
 
         toast('Saving...')
         const response = await putRequest();

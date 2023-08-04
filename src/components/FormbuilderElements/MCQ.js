@@ -31,7 +31,7 @@ const MCQ = ({ questionText, options, onChange, onDragEnd, setState, currentStat
     const addOption = () => {
         const uniqueId = uuidv4()
         const newOption = { id: uniqueId, text: 'new option' }
-        console.log(newOption)
+      
         let prevOption = [...options]
         prevOption = prevOption.concat(newOption);
         const prevSubquestion = [...currentState.subQuestions]

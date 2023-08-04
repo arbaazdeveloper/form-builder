@@ -44,7 +44,7 @@ const ViewResponse = () => {
 
         }
         getResponse();
-        console.log(formResponse)
+       
 
     }, [formId.id])
     return (

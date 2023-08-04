@@ -1,8 +1,7 @@
 import React from 'react'
 
 const Categorizeresponse = ({question,answer}) => {
-    console.log(question)
-    console.log(answer)
+   
   return (
     <div>
         <div className='flex justify-center gap-[10px]'>
